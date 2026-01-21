@@ -131,7 +131,7 @@ app.get('/api/auth/me', async (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-  res.send(201).json({message:"backend is running"})
+  res.status(201).json({message:"backend is running"})
 })
 
 const PORT = 8080;
