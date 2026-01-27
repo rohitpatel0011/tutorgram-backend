@@ -10,7 +10,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: ['https://tutorgram-backend.onrender.com','http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: ['https://tutorgram.vercel.app','http://localhost:3000', 'http://127.0.0.1:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
