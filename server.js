@@ -7,6 +7,8 @@ require('dotenv').config();
 
 const app = express();
 
+
+
 app.use(cors({
   origin: ['https://tutorgram-backend.onrender.com','http://localhost:3000', 'http://127.0.0.1:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -43,15 +45,13 @@ const User = mongoose.model('User', UserSchema);
 
 // 1. SIGNUP
 app.post('/api/auth/signup', async (req, res) => {
-  console.log("Signup Request Received:", req.body.email); // Debug Log
+  console.log("Signup Request Received:", req.body.email);
   try {
     const { name, email, password, avatarUrl } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: "User already exists" });
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({
       name, email,
       password: hashedPassword,
@@ -63,7 +63,7 @@ app.post('/api/auth/signup', async (req, res) => {
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET || 'secret');
 
-    console.log("User Created:", newUser.email); // Debug Log
+    console.log("User Created:", newUser.email);
     res.json({ token, user: newUser });
   } catch (err) {
     console.error("Signup Error:", err);
